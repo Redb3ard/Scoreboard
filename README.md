@@ -1,5 +1,5 @@
 #Scoreboard
-Scoreboard is a simple web service that aims to be a solution for storing game scores. The goal is to create clients that will message this service and store a player's score for you.
+Scoreboard is a simple web service that aims to be a solution for storing game scores. The goal is to create clients that will message this service and store a player's score for you. The server will be written in node.js and clients obviously written in the desired language. 
 
 
 ##API(Work In Progress)
