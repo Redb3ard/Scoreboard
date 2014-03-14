@@ -17,7 +17,7 @@ Scoreboard is a simple web service that aims to be a solution for storing game s
 
 ####/\<game\>/\<scores\>/\<playerId\>
 >**GET:** Gets all the games scores for a sepcific player
->**POST:** Creates a new playre score entry for the game. Payload TBD.
+>**POST:** Creates a new player score entry for the game. Payload TBD.
 >**STATUS: NOT-IMPLEMENTED**
 
 ##Configuring
