@@ -24,6 +24,9 @@ Scoreboard is a simple web service that aims to be a solution for storing game s
 >TBD
 
 ##How to run
+1.) First install dependencies via npm install.
+2.) Make sure you have a valid MongoDB instance running. Then proceed to configure the url in the config.js file.
+3.) Run node server.js and start submitting some scores!
 >TBD
 
 ##Clients
