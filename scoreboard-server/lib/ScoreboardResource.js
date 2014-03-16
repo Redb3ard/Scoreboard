@@ -1,9 +1,15 @@
 function Scoreboard() {
+  require('./schemas/Score');
+  var mongoose = require('mongoose');
   var scoreboard = {};
   //TODO: Load configuration
   
   scoreboard.getTopScores = function(req, res, next) {
-    //TODO: Smack out some database scores.
+	var Score = mongoose.model('Score');
+	Score.find(function(err, movies) {
+		console.error(err);
+	});
+    //TODO: Return some scores
     res.send('Topscores!');
     return next();
 	  

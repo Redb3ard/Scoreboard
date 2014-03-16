@@ -5,6 +5,7 @@
   "private": true,
   "dependencies": {
     "restify": ">=2.6.x",
-	"mocha":  ">=1.17.1"
+	"mocha":  ">=1.17.1",
+	"mongoose": ">=3.8.8"
   }
 }
