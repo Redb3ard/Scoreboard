@@ -1,20 +1,31 @@
-var restify = require('restify');
-var config = require('./config/config.js');
-var Scoreboard = require('./lib/ScoreboardResource.js');
-var mongoose = require('mongoose');
+var restify = require('restify'),
+  config = require('./config/config.js'),
+  Scoreboard = require('./lib/ScoreboardResource.js'),
+  mongoose = require('mongoose'),
+  scores = Scoreboard();
 
-var scores = Scoreboard();
-
-var server = restify.createServer({ name: 'Scoreboard' });
-
-server.get('/topscores', scores.getTopScores);
-
-server.listen(config.listenPort, function() {
-	mongoose.connect(config.db.url);
+mongoose.connect(config.db.url);
 	var db = mongoose.connection;
-	db.on('error', console.error);
+	db.on('error', function(err) {
+		console.log(err);
+		console.log('Shutting down...');
+		process.exit(1);
+	});
     db.once('open', function callback () {
 		console.log('Connected to db at %s',config.db.url);
-    });
+});
+
+var server = restify.createServer({ name: 'Scoreboard' });
+server.use(restify.bodyParser());
+
+/*
+ *API
+ */
+server.get('/scoreboard/topscores', scores.getTopScores);
+server.get('/scoreboard/:game/scores', scores.getAllScoresByGame);
+server.post('/scoreboard', scores.createPlayerScore);
+
+server.listen(config.listenPort, function() {
+	
 	console.log('%s started listening on port %s', server.name, server.url);
 });
