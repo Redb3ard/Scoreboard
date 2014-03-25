@@ -1,4 +1,5 @@
 var restify = require('restify'),
+  bunyan = require('bunyan'),
   config = require('./config/config.js'),
   Scoreboard = require('./lib/ScoreboardResource.js'),
   mongoose = require('mongoose'),
@@ -15,7 +16,8 @@ mongoose.connect(config.db.url);
 		console.log('Connected to db at %s',config.db.url);
 });
 
-var server = restify.createServer({ name: 'Scoreboard' });
+var logger = bunyan.createLogger({name:'ScoreboardApp'});
+var server = restify.createServer({ name: 'Scoreboard' , log: logger });
 server.use(restify.bodyParser());
 
 /*

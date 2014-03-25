@@ -21,15 +21,13 @@ function Scoreboard() {
   }
   
   scoreboard.getAllScoresByGame = function(req, res, next) {
-    res.setHeader('Access-Control-Allow-Origin','*');
-    console.log("Retrieving scores by game.");
+    req.log.info('Retrieving scores by game.');
 	Score.findAllScoresByGame(req.params.game, function(err, scores) {
 		if(err) {
 			res.send(err);
 		} else {
 			res.json(scores);
 		}
-		console.log("Returning scores for game: " + req.params.game);
 		return next();
 	});
   }
@@ -54,10 +52,11 @@ function Scoreboard() {
 							 score: req.body.score,
 							 playerId: req.body.player});
       score.save();
-	  //res.setHeader('Location',"TBD");
+	  var location = req.header('HOST')+'/scoreboard/' + score.game + '/scores';
+	  res.header('Location',location);
       res.send(201,"Player score created");
 	} else {
-	  res.send(404,'Invalid request payload!');
+	  res.send(400,'Invalid request payload!');
 	}
 	return next();
   }
